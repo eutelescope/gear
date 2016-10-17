@@ -26,17 +26,17 @@ class TrackerPlanesMaterialLayerImpl: public TrackerPlanesMaterialLayer  {
     /**      */
     std::string info;
     /**      */
-    double PositionX ;
+    double OffsetX ;
     /**      */
-    double PositionY ;
+    double OffsetY ;
     /**      */
-    double PositionZ ;
+    double OffsetZ ;
     /**      */
-    double RotationXY;
+    double DeltaRotationXY;
     /**      */
-    double RotationZX;
+    double DeltaRotationZX;
     /**      */
-    double RotationZY;
+    double DeltaRotationZY;
     /**      */
     double SizeX ;
     /**      */
@@ -44,11 +44,11 @@ class TrackerPlanesMaterialLayerImpl: public TrackerPlanesMaterialLayer  {
     /**      */
     double Thickness ;
     /**      */
-    double RadLength ;
+    std::string Material ;
     
     public:
      /** safe default contructor **/
-    TrackerPlanesMaterialLayerImpl() : ID(0), info(""), PositionX(0.), PositionY(0.), PositionZ(0.),  RotationXY(0.), RotationZX(0.), RotationZY(0.), SizeX(0.), SizeY(0.), Thickness(0.), RadLength(0.) { ; } ;
+    TrackerPlanesMaterialLayerImpl() : ID(0), info(""), OffsetX(0.), OffsetY(0.), OffsetZ(0.),  DeltaRotationXY(0.), DeltaRotationZX(0.), DeltaRotationZY(0.), SizeX(0.), SizeY(0.), Thickness(0.), Material("") { ; } ;
 
     /// Destructor.
     /**      */
@@ -58,17 +58,17 @@ class TrackerPlanesMaterialLayerImpl: public TrackerPlanesMaterialLayer  {
     /**      */
     virtual std::string getInfo() const { return info ; }
     /**      */
-    virtual double getPositionX() const { return PositionX  ; }
+    virtual double getOffsetX() const { return OffsetX  ; }
     /**      */
-    virtual double getPositionY() const { return PositionY  ; }
+    virtual double getOffsetY() const { return OffsetY  ; }
     /**      */
-    virtual double getPositionZ() const { return PositionZ  ; }
+    virtual double getOffsetZ() const { return OffsetZ  ; }
     /**      */
-    virtual double getRotationXY() const { return RotationXY  ; }
+    virtual double getDeltaRotationXY() const { return DeltaRotationXY  ; }
     /**      */
-    virtual double getRotationZX() const { return RotationZX  ; }
+    virtual double getDeltaRotationZX() const { return DeltaRotationZX  ; }
     /**      */
-    virtual double getRotationZY() const { return RotationZY  ; }
+    virtual double getDeltaRotationZY() const { return DeltaRotationZY  ; }
     /**      */
     virtual double getSizeX() const { return SizeX  ; }
     /**      */
@@ -76,7 +76,7 @@ class TrackerPlanesMaterialLayerImpl: public TrackerPlanesMaterialLayer  {
     /**      */
     virtual double getThickness() const { return Thickness  ; }
     /**      */
-    virtual double getRadLength() const { return RadLength  ; }	 
+    virtual std::string getMaterial() const { return Material  ; }	 
  
     // add "set" methods:
     /**      */
@@ -84,19 +84,19 @@ class TrackerPlanesMaterialLayerImpl: public TrackerPlanesMaterialLayer  {
     /**      */
     virtual void setInfo( std::string value) { info = value ; }
     /**      */
-    virtual void setRadLength( double value)  {  RadLength = value  ; }
+    virtual void setMaterial( std::string value)  {  Material = value  ; }
     /**      */
-    virtual void setPositionX( double value)  {  PositionX = value  ; }
+    virtual void setOffsetX( double value)  {  OffsetX = value  ; }
     /**      */
-    virtual void setPositionY( double value)  {  PositionY = value  ; }
+    virtual void setOffsetY( double value)  {  OffsetY = value  ; }
     /**      */
-    virtual void setPositionZ( double value)  {  PositionZ = value  ; }
+    virtual void setOffsetZ( double value)  {  OffsetZ = value  ; }
     /**      */
-    virtual void setRotationXY( double value) {  RotationXY = value ; }
+    virtual void setDeltaRotationXY( double value) {  DeltaRotationXY = value ; }
     /**      */
-    virtual void setRotationZX( double value) {  RotationZX = value ; }
+    virtual void setDeltaRotationZX( double value) {  DeltaRotationZX = value ; }
     /**      */
-    virtual void setRotationZY( double value) {  RotationZY = value ; }
+    virtual void setDeltaRotationZY( double value) {  DeltaRotationZY = value ; }
     /**      */
     virtual void setSizeX( double value)      {  SizeX = value      ; }
     /**      */
@@ -117,25 +117,46 @@ class TrackerPlanesSensitiveLayerImpl: public TrackerPlanesSensitiveLayer   {
     /**      */
     std::string info;
     /**      */
-    double PositionX ;
+    std::string geometry;
     /**      */
-    double PositionY ;
+    double OffsetX ;
     /**      */
-    double PositionZ ;
+    double OffsetY ;
     /**      */
-    double RotationXY;
+    double OffsetZ ;
     /**      */
-    double RotationZX;
+    double DeltaRotationXY;
     /**      */
-    double RotationZY;
+    double DeltaRotationZX;
     /**      */
-    double SizeX ;
+    double DeltaRotationZY;
+
     /**      */
-    double SizeY ;
+    double OffsetXunc;
+    /**      */
+    double OffsetYunc;
+    /**      */
+    double OffsetZunc;
+    /**      */
+    double DeltaRotationXYunc;
+    /**      */
+    double DeltaRotationZXunc;
+    /**      */
+    double DeltaRotationZYunc;
+
+    /**      */
+	int Flip1;
+    /**      */
+	int Flip2;
+    /**      */
+	int Flip3;
+    /**      */
+	int Flip4;
+
     /**      */
     double Thickness ;
     /**      */
-    double RadLength ;
+    std::string Material ;
 
     /**      */
     int NpixelX;
@@ -149,11 +170,22 @@ class TrackerPlanesSensitiveLayerImpl: public TrackerPlanesSensitiveLayer   {
     double ResolutionX;
     /**      */
     double ResolutionY;
+    /**      */
+    bool Enabled;
 
     public:
     /** safe default contructor **/
-    TrackerPlanesSensitiveLayerImpl() : ID(0), info(""), PositionX(0.), PositionY(0.), PositionZ(0.), RotationXY(0.), RotationZX(0.), RotationZY(0.),  SizeX(0.), SizeY(0.), Thickness(0.), RadLength(0.) 
-                                  , NpixelX(0), NpixelY(0), PitchX(0.), PitchY(0.), ResolutionX(0.), ResolutionY(0.)
+    TrackerPlanesSensitiveLayerImpl() :	ID(0), info(""), geometry(""),
+										OffsetX(0.), OffsetY(0.), OffsetZ(0.),
+										DeltaRotationXY(0.), DeltaRotationZX(0.), DeltaRotationZY(0.),
+										OffsetXunc(0.), OffsetYunc(0.), OffsetZunc(0.),
+										DeltaRotationXYunc(0.), DeltaRotationZXunc(0.), DeltaRotationZYunc(0.),
+										Flip1(1), Flip2(0), Flip3(0), Flip4(1),
+										Thickness(0.), Material(""),
+										NpixelX(0), NpixelY(0),
+										PitchX(0.), PitchY(0.),
+										ResolutionX(0.), ResolutionY(0.),
+										Enabled(true)
      { ; } ;
 
     /// Destructor.
@@ -164,25 +196,35 @@ class TrackerPlanesSensitiveLayerImpl: public TrackerPlanesSensitiveLayer   {
     /**      */
     virtual std::string getInfo() const { return info ; }
     /**      */
-    virtual double getPositionX() const { return PositionX  ; }
+    virtual std::string getGeometry() const { return geometry ; }
     /**      */
-    virtual double getPositionY() const { return PositionY  ; }
+    virtual double getOffsetX() const { return OffsetX  ; }
     /**      */
-    virtual double getPositionZ() const { return PositionZ  ; }
+    virtual double getOffsetY() const { return OffsetY  ; }
     /**      */
-    virtual double getRotationXY() const { return RotationXY  ; }
+    virtual double getOffsetZ() const { return OffsetZ  ; }
     /**      */
-    virtual double getRotationZX() const { return RotationZX  ; }
+    virtual double getDeltaRotationXY() const { return DeltaRotationXY  ; }
     /**      */
-    virtual double getRotationZY() const { return RotationZY  ; }
+    virtual double getDeltaRotationZX() const { return DeltaRotationZX  ; }
     /**      */
-    virtual double getSizeX() const { return SizeX  ; }
+    virtual double getDeltaRotationZY() const { return DeltaRotationZY  ; }
     /**      */
-    virtual double getSizeY() const { return SizeY  ; }
+    virtual double getOffsetXunc() const { return OffsetXunc  ; }
+    /**      */
+    virtual double getOffsetYunc() const { return OffsetYunc  ; }
+    /**      */
+    virtual double getOffsetZunc() const { return OffsetZunc  ; }
+    /**      */
+    virtual double getDeltaRotationXYunc() const { return DeltaRotationXYunc  ; }
+    /**      */
+    virtual double getDeltaRotationZXunc() const { return DeltaRotationZXunc  ; }
+    /**      */
+    virtual double getDeltaRotationZYunc() const { return DeltaRotationZYunc  ; }
     /**      */
     virtual double getThickness() const { return Thickness  ; }
     /**      */
-    virtual double getRadLength() const { return RadLength  ; }
+    virtual std::string getMaterial() const { return Material  ; }
 
     /**      */
     virtual int getNpixelX() const { return NpixelX  ; }
@@ -192,33 +234,55 @@ class TrackerPlanesSensitiveLayerImpl: public TrackerPlanesSensitiveLayer   {
     virtual double getPitchX() const { return PitchX  ; }
     /**      */
     virtual double getPitchY() const { return PitchY  ; }
-    /**      */
+	/**      */
+	virtual int getFlip1() const { return Flip1 ; }
+	/**      */
+	virtual int getFlip2() const { return Flip2 ; }
+	/**      */
+	virtual int getFlip3() const { return Flip3 ; }
+	/**      */
+	virtual int getFlip4() const { return Flip4 ; }
+	/**      */
     virtual double getResolutionX() const { return ResolutionX  ; }
     /**      */
     virtual double getResolutionY() const { return ResolutionY  ; }
+    /**      */
+	virtual bool getEnabled() const { return Enabled ; }
 
     /**      */
     virtual void setID( int value )           {  ID = value         ; }  
     /**      */
     virtual void setInfo( std::string value) { info = value ; }
     /**      */
-    virtual void setRadLength( double value)  {  RadLength = value  ; }
+    virtual void setGeometry( std::string value) { geometry = value ; }
     /**      */
-    virtual void setPositionX( double value)  {  PositionX = value  ; }
+    virtual void setMaterial( std::string value)  {  Material = value  ; }
     /**      */
-    virtual void setPositionY( double value)  {  PositionY = value  ; }
+    virtual void setOffsetX( double value)  {  OffsetX = value  ; }
     /**      */
-    virtual void setPositionZ( double value)  {  PositionZ = value  ; }
+    virtual void setOffsetY( double value)  {  OffsetY = value  ; }
     /**      */
-    virtual void setRotationXY( double value) {  RotationXY = value ; }
+    virtual void setOffsetZ( double value)  {  OffsetZ = value  ; }
     /**      */
-    virtual void setRotationZX( double value) {  RotationZX = value ; }
+    virtual void setDeltaRotationXY( double value) {  DeltaRotationXY = value ; }
     /**      */
-    virtual void setRotationZY( double value) {  RotationZY = value ; }
+    virtual void setDeltaRotationZX( double value) {  DeltaRotationZX = value ; }
     /**      */
-    virtual void setSizeX( double value)      {  SizeX = value      ; }
+    virtual void setDeltaRotationZY( double value) {  DeltaRotationZY = value ; }
+
     /**      */
-    virtual void setSizeY( double value)      {  SizeY = value      ; }
+    virtual void setOffsetXunc( double value)  {  OffsetXunc = value  ; }
+    /**      */
+    virtual void setOffsetYunc( double value)  {  OffsetYunc = value  ; }
+    /**      */
+    virtual void setOffsetZunc( double value)  {  OffsetZunc = value  ; }
+    /**      */
+    virtual void setDeltaRotationXYunc( double value) {  DeltaRotationXYunc = value ; }
+    /**      */
+    virtual void setDeltaRotationZXunc( double value) {  DeltaRotationZXunc = value ; }
+    /**      */
+    virtual void setDeltaRotationZYunc( double value) {  DeltaRotationZYunc = value ; }
+
     /**      */
     virtual void setThickness( double value)  {  Thickness = value  ; }
     /**      */
@@ -231,10 +295,24 @@ class TrackerPlanesSensitiveLayerImpl: public TrackerPlanesSensitiveLayer   {
     virtual void setPitchX( double value )      {  PitchX  = value ; }
     /**      */
     virtual void setPitchY( double value )      {  PitchY  = value ; }
+
+
+	/**      */
+	virtual void setFlip1( int value ) { Flip1 = value ; }
+	/**      */
+	virtual void setFlip2( int value ) { Flip3 = value ; }
+	/**      */
+	virtual void setFlip3( int value ) { Flip2 = value ; }
+	/**      */
+	virtual void setFlip4( int value ) { Flip4 = value ; }
+
     /**      */
     virtual void setResolutionX( double value ) {  ResolutionX = value ; }
     /**      */
     virtual void setResolutionY( double value ) {  ResolutionY = value ; }
+    
+    /**      */
+	virtual void setEnabled( bool value ) {  Enabled = value ; }
 
 };
 
@@ -252,6 +330,24 @@ class TrackerPlanesLayerImpl: public TrackerPlanesLayer  {
 
     /**      */
     std::string info;
+
+//---
+//-
+    double PositionX ;
+    double PositionY ;
+    double PositionZ ;
+    double RotationXY;
+    double RotationZX;
+    double RotationZY;
+    /**      */
+    double PositionXunc;
+    double PositionYunc;
+    double PositionZunc;
+    double RotationXYunc;
+    double RotationZXunc;
+    double RotationZYunc;
+//-
+//---
 
     /** material Layer vector */
     TrackerPlanesMaterialLayerImplVec _materialVec ;
@@ -307,33 +403,71 @@ class TrackerPlanesLayerImpl: public TrackerPlanesLayer  {
     /** The total number of Sensitive layers. */
     virtual int getNSensitiveLayers() const {return _sensitiveVec.size(); }
 
-    /** get methods
-     */
-    TrackerPlanesMaterialLayerImplVec& getMaterialLayerVec(){ return _materialVec;}
+//---
+//-
+    virtual void setPositionX( double value)  {  PositionX = value  ; }
+    virtual void setPositionY( double value)  {  PositionY = value  ; }
+    virtual void setPositionZ( double value)  {  PositionZ = value  ; }
+    virtual void setRotationXY( double value) {  RotationXY = value ; }
+    virtual void setRotationZX( double value) {  RotationZX = value ; }
+    virtual void setRotationZY( double value) {  RotationZY = value ; }
+    virtual void setPositionXunc( double value)  {  PositionXunc = value  ; }
+    virtual void setPositionYunc( double value)  {  PositionYunc = value  ; }
+    virtual void setPositionZunc( double value)  {  PositionZunc = value  ; }
+    virtual void setRotationXYunc( double value) {  RotationXYunc = value ; }
+    virtual void setRotationZXunc( double value) {  RotationZXunc = value ; }
+    virtual void setRotationZYunc( double value) {  RotationZYunc = value ; }
+//-
+    virtual double getPositionX() const { return PositionX  ; }
+    virtual double getPositionY() const { return PositionY  ; }
+    virtual double getPositionZ() const { return PositionZ  ; }
+    virtual double getRotationXY() const { return RotationXY  ; }
+    virtual double getRotationZX() const { return RotationZX  ; }
+    virtual double getRotationZY() const { return RotationZY  ; }
+    virtual double getPositionXunc() const { return PositionXunc  ; }
+    virtual double getPositionYunc() const { return PositionYunc  ; }
+    virtual double getPositionZunc() const { return PositionZunc  ; }
+    virtual double getRotationXYunc() const { return RotationXYunc  ; }
+    virtual double getRotationZXunc() const { return RotationZXunc  ; }
+    virtual double getRotationZYunc() const { return RotationZYunc  ; }
+//-
+//---
+
+
+
+
 
     /** get methods
      */
-    TrackerPlanesSensitiveLayerImplVec& getSensitiveLayerVec(){ return _sensitiveVec;}
+    TrackerPlanesMaterialLayerImplVec const & getMaterialLayerVec() const { return _materialVec;}
+
+    /** get methods
+     */
+    TrackerPlanesSensitiveLayerImplVec const & getSensitiveLayerVec() const { return _sensitiveVec;}
 
     /** add methods
      */
     virtual void addMaterialLayer(
-			      int ID, std::string info,	 
-			      double PositionX, double PositionY, double PositionZ,
-			      double RotationXY, double RotationZX, double RotationZY,
-			      double SizeX, double SizeY, double Thickness, double RadLength
+			      int ID, std::string info,
+			      double OffsetX, double OffsetY, double OffsetZ,
+			      double DeltaRotationXY, double DeltaRotationZX, double DeltaRotationZY,
+			      double SizeX, double SizeY, double Thickness, std::string Material
                               );
   
 
     /** add methods
      */
     virtual void addSensitiveLayer(
-			      int ID, std::string info,
-			      double PositionX, double PositionY, double PositionZ,
-			      double RotationXY, double RotationZX, double RotationZY,
-			      double SizeX, double SizeY, double Thickness, double RadLength,
+			      int ID, std::string info, std::string geometry,
+			      double OffsetX, double OffsetY, double OffsetZ,
+			      double DeltaRotationXY, double DeltaRotationZX, double DeltaRotationZY,
+			      double OffsetXunc, double OffsetYunc, double OffsetZunc,
+			      double DeltaRotationXYunc, double DeltaRotationZXunc, double DeltaRotationZYunc,
+				  int Flip1, int Flip2, int Flip3, int Flip4,
+			      double Thickness, std::string Material,
 			      int NpixelX, int NpixelY,
-			      double PitchX,double PitchY, double ResolutionX, double ResolutionY
+			      double PitchX,double PitchY, double ResolutionX, double ResolutionY,
+				  bool Enabled
                               ); 
 
 };
@@ -351,23 +485,23 @@ class TrackerPlanesLayerLayoutImpl : public TrackerPlanesLayerLayout {
 	  
 	private:
 
-          /** */
-          int ID;
+    /** */
+    int ID;
 
-	  /**      */
-          std::string info;
+	/**      */
+    std::string info;
 
-	  /** Layer */
-	  TrackerPlanesLayerImplVec _layerVec ;
+	/** Layer */
+	TrackerPlanesLayerImplVec _layerVec ;
 
 	public: 
 
-          /** */
+      /** */
 	  TrackerPlanesLayerLayoutImpl() {
 	    _layerVec.clear();
 	  };
 
-          /** */
+      /** */
 	  virtual void addLayer( TrackerPlanesLayerImpl* layer ){
 	    _layerVec.push_back( *layer ) ;
 	  }
@@ -384,13 +518,14 @@ class TrackerPlanesLayerLayoutImpl : public TrackerPlanesLayerLayout {
           /** */
           virtual std::string getInfo() const { return info; }
  
-          /** */
-          virtual void setInfo(std::string value) { info = value; }
+      /** */
+      virtual void setInfo(std::string value) { info = value; }
  
 	  /** */
 	  virtual int getNLayers() const { 
             return _layerVec.size() ; 
           }	 
+
 
           /** */
 	  virtual const TrackerPlanesLayerImpl* getLayer( unsigned int ID ) const { 
@@ -411,6 +546,7 @@ class TrackerPlanesLayerLayoutImpl : public TrackerPlanesLayerLayout {
 
             return 0; 
           }
+
    
 /** */
 	virtual void PrintHeader( std::ostream& s ) const {
@@ -453,40 +589,38 @@ sprintf(buffer,"|------------------|--------------------------------------------
                 TrackerPlanesSensitiveLayerImplVec::const_iterator se = layer->getSensitiveLayerVec().end();
 
                 for( TrackerPlanesMaterialLayerImplVec::const_iterator ml = mb ; ml < me; ml++) {
-      		  sprintf(buffer,"|%3s %14s|%3d %14s %5.0f %5.0f %5.0f %5.0f %5.0f %5.0f %5.2f %5.2f %5.2f %5.2f|%3s %14s %5s %5s %5s %5s %5s %5s %5s %5s %5s %5s`%5s %5s %6s %6s %6s %6s|\n"
+      		  sprintf(buffer,"|%3s %14s|%3d %14s %5.0f %5.0f %5.0f %5.0f %5.0f %5.0f %5.2f %5.2f %5.2f %10s|%3s %14s %5s %5s %5s %5s %5s %5s %5s %5s %5s %5s`%5s %5s %6s %6s %6s %6s|\n"
                       , a,a
                       , (*ml).getID() 
 		      , (*ml).getInfo().c_str() 
-		      , (*ml).getPositionX() 
-		      , (*ml).getPositionY() 
-		      , (*ml).getPositionZ()
-		      , (*ml).getRotationXY() 
-		      , (*ml).getRotationZX() 
-		      , (*ml).getRotationZY()
+		      , (*ml).getOffsetX() 
+		      , (*ml).getOffsetY() 
+		      , (*ml).getOffsetZ()
+		      , (*ml).getDeltaRotationXY() 
+		      , (*ml).getDeltaRotationZX() 
+		      , (*ml).getDeltaRotationZY()
 		      , (*ml).getSizeX() 
 		      , (*ml).getSizeY() 
 		      , (*ml).getThickness()
- 		      , (*ml).getRadLength()
+ 		      , (*ml).getMaterial()
 	              , a,a ,a,a,a,a,a,a,a,a,a,a, a,a,a,a,a,a
  		  ); 
 	   	  s << buffer ;
                 }
 	
                 for( TrackerPlanesSensitiveLayerImplVec::const_iterator sl = sb ; sl < se; sl++) {
-	sprintf(buffer,"|%3s %14s|%3s %14s %5s %5s %5s %5s %5s %5s %5s %5s %5s %5s|%3d %14s %5.0f %5.0f %5.0f %5.0f %5.0f %5.0f %5.2f %5.2f %5.2f %5.2f`%5d %5d %5.4f %5.4f %5.4f %5.4f|\n"
+	sprintf(buffer,"|%3s %14s|%3s %14s %5s %5s %5s %5s %5s %5s %5s %5s %5s %5s|%3d %14s %5.0f %5.0f %5.0f %5.0f %5.0f %5.0f %5.2f %10s`%5d %5d %5.4f %5.4f %5.4f %5.4f|\n"
                       , a,a,   a,a,  a,a,  a,a,  a,a,  a,a,  a,a
  		      , (*sl).getID() 
  		      , (*sl).getInfo().c_str()
-		      , (*sl).getPositionX() 
-		      , (*sl).getPositionY() 
-		      , (*sl).getPositionZ()
-		      , (*sl).getRotationXY() 
-		      , (*sl).getRotationZX() 
-		      , (*sl).getRotationZY()
-		      , (*sl).getSizeX() 
-		      , (*sl).getSizeY() 
+		      , (*sl).getOffsetX() 
+		      , (*sl).getOffsetY() 
+		      , (*sl).getOffsetZ()
+		      , (*sl).getDeltaRotationXY() 
+		      , (*sl).getDeltaRotationZX() 
+		      , (*sl).getDeltaRotationZY()
 		      , (*sl).getThickness() 
-		      , (*sl).getRadLength()
+		      , (*sl).getMaterial()
 
 		      , (*sl).getNpixelX() 
 		      , (*sl).getNpixelY() 
