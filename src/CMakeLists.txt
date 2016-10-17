@@ -5,7 +5,7 @@
 ##################################
 
 # common definitions to ALL sources
-#ADD_DEFINITIONS( "-Wno-long-long" )
+ADD_DEFINITIONS( "-std=c++11" )
 #ADD_DEFINITIONS( "-Wall -ansi -pedantic" )
 
 IF(APPLE)
