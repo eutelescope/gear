@@ -602,7 +602,7 @@ sprintf(buffer,"|------------------|--------------------------------------------
 		      , (*ml).getSizeX() 
 		      , (*ml).getSizeY() 
 		      , (*ml).getThickness()
- 		      , (*ml).getMaterial()
+ 		      , (*ml).getMaterial().c_str()
 	              , a,a ,a,a,a,a,a,a,a,a,a,a, a,a,a,a,a,a
  		  ); 
 	   	  s << buffer ;
@@ -620,7 +620,7 @@ sprintf(buffer,"|------------------|--------------------------------------------
 		      , (*sl).getDeltaRotationZX() 
 		      , (*sl).getDeltaRotationZY()
 		      , (*sl).getThickness() 
-		      , (*sl).getMaterial()
+		      , (*sl).getMaterial().c_str()
 
 		      , (*sl).getNpixelX() 
 		      , (*sl).getNpixelY() 
