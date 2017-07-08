@@ -210,6 +210,10 @@ class TrackerPlanesSensitiveLayerImpl: public TrackerPlanesSensitiveLayer   {
     /**      */
     virtual double getDeltaRotationZY() const { return DeltaRotationZY  ; }
     /**      */
+    virtual double getSizeX() const { return 0  ; }
+    /**      */
+    virtual double getSizeY() const { return 0  ; }
+    /**      */
     virtual double getOffsetXunc() const { return OffsetXunc  ; }
     /**      */
     virtual double getOffsetYunc() const { return OffsetYunc  ; }
