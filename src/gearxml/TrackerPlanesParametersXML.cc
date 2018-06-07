@@ -64,30 +64,30 @@ namespace gear {
 	  double posX = layer->getPositionX();
 	  double posY = layer->getPositionY();
 	  double posZ = layer->getPositionZ();
-	  if(posX != 0) xmlLayer.SetAttribute( LAYER_POSX, posX );
-	  if(posY != 0) xmlLayer.SetAttribute( LAYER_POSY, posY );
-	  if(posZ != 0) xmlLayer.SetAttribute( LAYER_POSZ, posZ );
+	  if(posX != 0) xmlLayer.SetDoubleAttribute( LAYER_POSX, posX );
+	  if(posY != 0) xmlLayer.SetDoubleAttribute( LAYER_POSY, posY );
+	  if(posZ != 0) xmlLayer.SetDoubleAttribute( LAYER_POSZ, posZ );
 	  
 	  double posXunc = layer->getPositionXunc();
 	  double posYunc = layer->getPositionYunc();
 	  double posZunc = layer->getPositionZunc();
-	  if(posXunc != 0) xmlLayer.SetAttribute( LAYER_POSXUNC, posXunc );
-	  if(posYunc != 0) xmlLayer.SetAttribute( LAYER_POSYUNC, posYunc );
-	  if(posZunc != 0) xmlLayer.SetAttribute( LAYER_POSZUNC, posZunc );
+	  if(posXunc != 0) xmlLayer.SetDoubleAttribute( LAYER_POSXUNC, posXunc );
+	  if(posYunc != 0) xmlLayer.SetDoubleAttribute( LAYER_POSYUNC, posYunc );
+	  if(posZunc != 0) xmlLayer.SetDoubleAttribute( LAYER_POSZUNC, posZunc );
 
 	  double rotXY = layer->getRotationXY();
 	  double rotZX = layer->getRotationZX();
 	  double rotZY = layer->getRotationZY();
-	  if(rotXY != 0) xmlLayer.SetAttribute( LAYER_ROTXY, rotXY );
-	  if(rotZX != 0) xmlLayer.SetAttribute( LAYER_ROTZX, rotZX );
-	  if(rotZY != 0) xmlLayer.SetAttribute( LAYER_ROTZY, rotZY );
+	  if(rotXY != 0) xmlLayer.SetDoubleAttribute( LAYER_ROTXY, rotXY );
+	  if(rotZX != 0) xmlLayer.SetDoubleAttribute( LAYER_ROTZX, rotZX );
+	  if(rotZY != 0) xmlLayer.SetDoubleAttribute( LAYER_ROTZY, rotZY );
 	
 	  double rotXYunc = layer->getRotationXYunc();
 	  double rotZXunc = layer->getRotationZXunc();
 	  double rotZYunc = layer->getRotationZYunc();
-	  if(rotXYunc != 0) xmlLayer.SetAttribute( LAYER_ROTXYUNC, rotXYunc );
-	  if(rotZXunc != 0) xmlLayer.SetAttribute( LAYER_ROTZXUNC, rotZXunc );
-	  if(rotZYunc != 0) xmlLayer.SetAttribute( LAYER_ROTZYUNC, rotZYunc );
+	  if(rotXYunc != 0) xmlLayer.SetDoubleAttribute( LAYER_ROTXYUNC, rotXYunc );
+	  if(rotZXunc != 0) xmlLayer.SetDoubleAttribute( LAYER_ROTZXUNC, rotZXunc );
+	  if(rotZYunc != 0) xmlLayer.SetDoubleAttribute( LAYER_ROTZYUNC, rotZYunc );
 
 
 	  //Each <layer> can have multiple <ladder> & <sensitive> nodes
