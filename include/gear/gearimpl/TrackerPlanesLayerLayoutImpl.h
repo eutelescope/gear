@@ -210,6 +210,10 @@ class TrackerPlanesSensitiveLayerImpl: public TrackerPlanesSensitiveLayer   {
     /**      */
     virtual double getDeltaRotationZY() const { return DeltaRotationZY  ; }
     /**      */
+    virtual double getSizeX() const { return 0  ; }
+    /**      */
+    virtual double getSizeY() const { return 0  ; }
+    /**      */
     virtual double getOffsetXunc() const { return OffsetXunc  ; }
     /**      */
     virtual double getOffsetYunc() const { return OffsetYunc  ; }
@@ -602,7 +606,7 @@ sprintf(buffer,"|------------------|--------------------------------------------
 		      , (*ml).getSizeX() 
 		      , (*ml).getSizeY() 
 		      , (*ml).getThickness()
- 		      , (*ml).getMaterial()
+ 		      , (*ml).getMaterial().c_str()
 	              , a,a ,a,a,a,a,a,a,a,a,a,a, a,a,a,a,a,a
  		  ); 
 	   	  s << buffer ;
@@ -620,7 +624,7 @@ sprintf(buffer,"|------------------|--------------------------------------------
 		      , (*sl).getDeltaRotationZX() 
 		      , (*sl).getDeltaRotationZY()
 		      , (*sl).getThickness() 
-		      , (*sl).getMaterial()
+		      , (*sl).getMaterial().c_str()
 
 		      , (*sl).getNpixelX() 
 		      , (*sl).getNpixelY() 
